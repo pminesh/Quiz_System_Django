@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<script>
+    function show(id, answer) {
+        var id = id;
+        var ans = answer;
+        var op = document.getElementsByName(id);
+        var op_value;
+        for (var i = 0; i < op.length; i++) {
+            if (op[i].checked) {
+                if (op[i].value == ans) {
+                    document.getElementById(id).innerHTML = "Right Answer" + " 😎";
+                    for (var i = 0; i < op.length; i++) {
+                        op[i].disabled = true;
+                    }
+                }
+                else {
+
+                    var x = document.getElementsByClassName(id);
+                    x[0].innerHTML = "Wrong Answer" + " 😔";
+                    document.getElementById(id).innerHTML = "Answer is: " + ans;
+                    for (var i = 0; i < op.length; i++) {
+                        op[i].disabled = true;
+                    }
+
+                }
+            }
+        }
+    }
+</script>
+<div class="container">
+    <h1 class="text-center"><u>{{course_name}}</u></h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for i in questions %}
+        <h6>{{i.id}}.{{i.qustion}}</h6><br>
+        <input type="radio" name="{{i.id}}" value="{{i.option1}}" id="q1a" style="margin-right: 10px;"
+            onclick="show('{{i.id}}','{{i.answer}}')">{{i.option1}}<br><br>
+        <input type="radio" name="{{i.id}}" value="{{i.option2}}" id="q1b" style="margin-right: 10px;"
+            onclick="show('{{i.id}}','{{i.answer}}')">{{i.option2}}<br><br>
+        <input type="radio" name="{{i.id}}" value="{{i.option3}}" id="q1c" style="margin-right: 10px;"
+            onclick="show('{{i.id}}','{{i.answer}}')">{{i.option3}}<br><br>
+        <input type="radio" name="{{i.id}}" value="{{i.option4}}" id="q1d" style="margin-right: 10px;"
+            onclick="show('{{i.id}}','{{i.answer}}')">{{i.option4}}<br><br>
+        <input type="text" name="answer" value="{{i.answer}}" style="display: none;">
+        <p class="{{i.id}}" style="color: red; font-weight: bold;"></p>
+        <p id="{{i.id}}" style="color:green;font-weight: bold;"></p>
+        {% endfor %}
+        <button class="btn btn-primary"><a href="/{{id}}"
+                style="text-decoration: none; color: aliceblue;">Reset</a></button><br><br>
+    </form>
+</div>
+{% endblock body %}
+
+{% block footer %}
+{% endblock footer %}

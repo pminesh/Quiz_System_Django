@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>    
+    <link rel="stylesheet" type="text/css" href="/CWH/static/css/style.css" />
+    <script src='main.js'></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <h1>Registration Page</h1>
+            </div>
+
+            <!-- Login Form -->
+            <form method="POST" action="/register">
+                {% csrf_token %}
+                <input type="text" id="login" class="fadeIn second" name="username" placeholder="User Name" required>
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" required>
+                <input type="text" id="firstname" class="fadeIn second" name="firstname" placeholder="First Name" required>
+                <input type="text" id="lastname" class="fadeIn second" name="lastname" placeholder="Last Name" required>
+                <input type="submit" class="fadeIn fourth" value="Submit">
+            </form>
+            {% for message in  messages%}
+            <script>alert("{{message}}")</script>
+            {% endfor %}
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+            <div id="formFooter">
+                <a class="underlineHover" href="/">Login User?</a>
+            </div>
+        </div>
+    </div>
+    {%for i in messages%}
+    <script>
+        alert('{{i}}')
+    </script>
+    {% endfor %}
+</body>
+
+</html>
